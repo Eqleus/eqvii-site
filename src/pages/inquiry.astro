@@ -1,13 +1,206 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import InquiryBoundaryPanel from '../components/page/InquiryBoundaryPanel.astro';
+import InsideOutsideTable from '../components/page/InsideOutsideTable.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
+import ButtonLink from '../components/ui/ButtonLink.astro';
+import { contact } from '../data/contact';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const inquiryCanDo = [
+  'Perimeter review',
+  'Vehicle-design discussion',
+  'Mandate or procurement translation',
+  'PRF / EQVII boundary clarification',
+  'Execution-readiness review',
+  'Counterparty and public-value obligation mapping',
+  'Responsible redirect',
+];
+
+const inquiryCannotDo = [
+  'Investment entitlement',
+  'Legal mandate',
+  'Procurement award',
+  'Capital commitment',
+  'Endorsement',
+  'Priority',
+  'Public claim',
+  'Access to protected spaces',
+  'Route around the Equilibrium Secretariat',
+  'Right to use the Equilibrium identity',
+];
+
+const inquiryFields = [
+  'Name',
+  'Organization',
+  'Role',
+  'Email',
+  'Inquiry type',
+  'Challenge area',
+  'Proposed execution component',
+  'Current mandate or counterparty, if any',
+  'Payment logic, if known',
+  'Public-value obligation, if known',
+  'PRF / EQVII boundary concern, if relevant',
+  'Notes',
+];
+
+const inquiryTypes = [
+  'Perimeter review',
+  'Vehicle-design discussion',
+  'Execution mandate',
+  'PRF / EQVII boundary question',
+  'Purposeful media vehicle',
+  'Technology or data platform',
+  'Responsible redirect',
+  'Other',
+];
+
+const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicInquiryEmail}` : '';
 ---
 
-<BaseLayout title="Inquiry" description="Placeholder page for inquiry information.">
-  <SectionShell>
-    <PageIntro title="Inquiry">
-      <p>Placeholder page for future inquiry information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="Routed Inquiry"
+  description="EQVII routed inquiry begins with perimeter classification. It does not create transaction status, authorization, priority, or association rights."
+>
+  <PageHero
+    eyebrow="Routed inquiry"
+    heading="Begin with the perimeter."
+    body="A routed inquiry is not a transaction claim. It is the first step in determining whether a component belongs inside or outside EQVII."
+  />
+
+  <PageSection
+    id="inquiry-scope"
+    eyebrow="Inquiry scope"
+    heading="What an inquiry can and cannot do"
+  >
+    <InsideOutsideTable
+      insideTitle="An inquiry can help determine whether a matter may require"
+      outsideTitle="An inquiry cannot create"
+      insideItems={inquiryCanDo}
+      outsideItems={inquiryCannotDo}
+    />
+  </PageSection>
+
+  <PageSection
+    id="information-requested"
+    eyebrow="Information requested"
+    heading="The first file is classificatory."
+    lead="The routing layer should gather enough information to classify the matter without implying approval, mandate, investment access, or permission to make public claims."
+    tone="panel"
+  >
+    <div class="inquiry-file">
+      <article>
+        <h3>Fields to prepare</h3>
+        <ul>
+          {inquiryFields.map((field) => <li>{field}</li>)}
+        </ul>
+      </article>
+      <article>
+        <h3>Inquiry type options</h3>
+        <ul>
+          {inquiryTypes.map((type) => <li>{type}</li>)}
+        </ul>
+      </article>
+    </div>
+    <p class="inquiry-placeholder">Formal inquiry routing will be added once the public contact route is confirmed.</p>
+  </PageSection>
+
+  <PageSection
+    id="boundary-note"
+    eyebrow="Boundary note"
+    heading="Submission does not create status."
+  >
+    <InquiryBoundaryPanel
+      title="Non-claim rule"
+      items={[
+        'No authorization',
+        'No endorsement',
+        'No transaction status',
+        'No investment access',
+        'No procurement status',
+        'No capital commitment',
+        'No priority',
+        'No public permission to claim association with EQVII Holdings or The Equilibrium System',
+      ]}
+    />
+  </PageSection>
+
+  <PageSection
+    id="final-routing"
+    eyebrow="Routing status"
+    heading="Prepare the file before the route."
+    tone="panel"
+  >
+    {
+      inquiryEmailHref ? (
+        <ButtonLink href={inquiryEmailHref}>Prepare inquiry email</ButtonLink>
+      ) : (
+        <RuleNote>
+          <p>Formal inquiry routing will be added once the public contact route is confirmed.</p>
+        </RuleNote>
+      )
+    }
+  </PageSection>
 </BaseLayout>
+
+<style>
+  .inquiry-file {
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inquiry-file article {
+    background: var(--color-surface);
+    min-width: 0;
+    padding: var(--space-5);
+  }
+
+  .inquiry-file article + article {
+    border-left: 1px solid var(--color-rule-strong);
+  }
+
+  .inquiry-file h3 {
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .inquiry-file ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .inquiry-file li {
+    color: var(--color-muted);
+    line-height: 1.48;
+    padding-block: var(--space-3);
+  }
+
+  .inquiry-file li + li {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .inquiry-placeholder {
+    border-left: 2px solid var(--color-steel);
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: var(--space-5) 0 0;
+    padding-left: var(--space-4);
+  }
+
+  @media (max-width: 46rem) {
+    .inquiry-file {
+      grid-template-columns: 1fr;
+    }
+
+    .inquiry-file article + article {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule-strong);
+    }
+  }
+</style>

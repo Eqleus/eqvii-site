@@ -1,0 +1,189 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+import PerimeterStrip from './PerimeterStrip.astro';
+
+interface Props {
+  eyebrow: string;
+  headline: string;
+  subline: string;
+  stripItems: string[];
+}
+
+const { eyebrow, headline, subline, stripItems } = Astro.props;
+---
+
+<section class="hero-perimeter" aria-labelledby="home-hero-title">
+  <div class="container hero-perimeter__inner">
+    <div class="hero-perimeter__copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 id="home-hero-title">{headline}</h1>
+      <p class="hero-perimeter__subline">{subline}</p>
+      <div class="hero-perimeter__actions" aria-label="Primary actions">
+        <ButtonLink href="/perimeter/">Explore the perimeter</ButtonLink>
+        <ButtonLink href="/inquiry/" variant="secondary">Begin a routed inquiry</ButtonLink>
+      </div>
+    </div>
+
+    <aside class="hero-perimeter__file" aria-label="EQVII perimeter file">
+      <div class="hero-perimeter__file-header">
+        <span>Review file</span>
+        <span>EQVII / 01</span>
+      </div>
+      <dl>
+        <div>
+          <dt>Capital</dt>
+          <dd>Enters only after perimeter review.</dd>
+        </div>
+        <div>
+          <dt>System</dt>
+          <dd>Not converted into a financial product.</dd>
+        </div>
+        <div>
+          <dt>Route</dt>
+          <dd>Vehicle, mandate, contract, or execution structure.</dd>
+        </div>
+      </dl>
+    </aside>
+
+    <div class="hero-perimeter__strip">
+      <PerimeterStrip items={stripItems} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-perimeter {
+    background:
+      linear-gradient(90deg, var(--color-rule) 1px, transparent 1px) 0 0 / 4.5rem 4.5rem,
+      linear-gradient(var(--color-rule-soft) 1px, transparent 1px) 0 0 / 100% 4.5rem,
+      var(--color-background);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .hero-perimeter__inner {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 27rem);
+    padding-block: var(--space-10);
+  }
+
+  .hero-perimeter__copy {
+    max-width: 55rem;
+    min-width: 0;
+  }
+
+  .hero-perimeter h1 {
+    font-size: 4.75rem;
+    line-height: 0.98;
+    margin: var(--space-5) 0 0;
+    max-width: 12ch;
+  }
+
+  .hero-perimeter__subline {
+    color: var(--color-muted);
+    font-size: 1.22rem;
+    line-height: 1.62;
+    margin: var(--space-6) 0 0;
+    max-width: 43rem;
+  }
+
+  .hero-perimeter__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+  }
+
+  .hero-perimeter__file {
+    align-self: end;
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    border: 1px solid var(--color-rule-strong);
+    box-shadow: 0 24px 60px color-mix(in srgb, var(--color-text) 8%, transparent);
+    min-width: 0;
+  }
+
+  .hero-perimeter__file-header {
+    align-items: center;
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-muted);
+    display: flex;
+    font-size: 0.75rem;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .hero-perimeter dl {
+    margin: 0;
+  }
+
+  .hero-perimeter dl div {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 6rem 1fr;
+    padding: var(--space-4);
+  }
+
+  .hero-perimeter dl div + div {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .hero-perimeter dt {
+    color: var(--color-text);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .hero-perimeter dd {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .hero-perimeter__strip {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  @media (max-width: 62rem) {
+    .hero-perimeter__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-perimeter h1 {
+      font-size: 3.65rem;
+    }
+
+    .hero-perimeter__file {
+      align-self: stretch;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .hero-perimeter__inner {
+      padding-block: var(--space-8);
+    }
+
+    .hero-perimeter h1 {
+      font-size: 2.35rem;
+      max-width: 9.25ch;
+    }
+
+    .hero-perimeter__subline {
+      font-size: 1.05rem;
+      max-width: 21rem;
+    }
+
+    .hero-perimeter__actions {
+      align-items: flex-start;
+      flex-direction: column;
+      max-width: 21rem;
+    }
+
+    .hero-perimeter dl div {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-perimeter__file {
+      max-width: 21rem;
+    }
+  }
+</style>

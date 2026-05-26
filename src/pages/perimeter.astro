@@ -1,13 +1,146 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import GateMatrix from '../components/page/GateMatrix.astro';
+import InsideOutsideTable from '../components/page/InsideOutsideTable.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const protectedItems = [
+  'Public legitimacy',
+  'Responsible capital',
+  'Affected communities',
+  'Lawful mandate',
+  'Financing separation',
+  'Evidence independence',
+  'Trust in the wider Equilibrium System',
+];
+
+const gates = [
+  { number: '01', label: 'Lawful route' },
+  { number: '02', label: 'Clear counterparty' },
+  { number: '03', label: 'Payment logic' },
+  { number: '04', label: 'Mandate or procurement path' },
+  { number: '05', label: 'Execution owner' },
+  { number: '06', label: 'Public-value obligation' },
+  { number: '07', label: 'Financing separation' },
+  { number: '08', label: 'Downside containment' },
+  { number: '09', label: 'Disclosure discipline' },
+  { number: '10', label: 'Stop / correction rights' },
+];
+
+const insideItems = [
+  'Ring-fenced operating vehicles',
+  'Sustainable enterprise platforms',
+  'Contracted service structures',
+  'Public-private mandates',
+  'Execution platforms',
+  'Purposeful media vehicles with cleared controls',
+];
+
+const outsideItems = [
+  'The Equilibrium System as an investment product',
+  'PRF public-good layers',
+  'Eqleus protected spaces',
+  '7WW7 coalition spaces',
+  'Equilibratory conclusions',
+  'Grants',
+  'Lobbying or influence work',
+  'Sponsor rewards',
+  'Claims that the System itself is investable',
+];
+
+const stopActions = [
+  'Pause before public claim hardens.',
+  'Redirect to PRF, public budget, philanthropy, or non-commercial support.',
+  'Decline where the route cannot withstand fiduciary scrutiny.',
+  'Remediate the file, counterparty, mandate, or disclosure record.',
+  'Terminate or exit responsibly when correction is insufficient.',
+  'Correct public claims that overstate maturity, endorsement, safety, or scope.',
+];
 ---
 
-<BaseLayout title="Perimeter" description="Placeholder page for perimeter information.">
-  <SectionShell>
-    <PageIntro title="Perimeter">
-      <p>Placeholder page for future perimeter information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="The EQVII Perimeter"
+  description="The EQVII perimeter defines when a ring-fenced component is eligible for disciplined execution review under public-value constraint."
+>
+  <PageHero
+    eyebrow="The EQVII perimeter"
+    heading="The perimeter is what makes capital defensible."
+    body="EQVII does not ask whether capital can be attracted first. It asks whether a defined component can lawfully carry enterprise discipline without weakening legitimacy, hiding subsidy, or converting public value into private advantage."
+    actions={[
+      { label: 'Begin a routed inquiry', href: '/inquiry/' },
+      { label: 'Review vehicle families', href: '/vehicles/', variant: 'secondary' },
+    ]}
+  />
+
+  <PageSection
+    id="what-the-perimeter-protects"
+    eyebrow="Perimeter protection"
+    heading="What the perimeter protects"
+    lead="The perimeter is not a decorative boundary. It is the control surface that keeps public value, accountable execution, and responsible capital from being collapsed into one blurred claim."
+  >
+    <div class="record-grid">
+      {
+        protectedItems.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </article>
+        ))
+      }
+    </div>
+    <RuleNote>
+      <p>Capital does not create legitimacy. It inherits it through route, mandate, obligation, and review, or it distorts it.</p>
+    </RuleNote>
+  </PageSection>
+
+  <PageSection
+    id="investable-perimeter-test"
+    eyebrow="Investable perimeter test"
+    heading="The Investable Perimeter Test"
+    tone="panel"
+  >
+    <GateMatrix gates={gates} />
+    <RuleNote>
+      <p>If these conditions cannot be stated in a reviewable file, the work remains outside EQVII until it matures.</p>
+    </RuleNote>
+  </PageSection>
+
+  <PageSection
+    id="inside-outside"
+    eyebrow="Inside / outside"
+    heading="Inside and outside the perimeter"
+    lead="EQVII can govern defined execution structures. It cannot convert the whole System or its protected civic, evidence, public-good, or responsibility-forming layers into a financial object."
+  >
+    <InsideOutsideTable
+      insideTitle="Inside EQVII where justified"
+      outsideTitle="Outside EQVII"
+      insideItems={insideItems}
+      outsideItems={outsideItems}
+    />
+  </PageSection>
+
+  <PageSection
+    id="capital-entry-rule"
+    eyebrow="Capital entry rule"
+    heading="Capital enters late because unresolved upstream risk eventually becomes execution failure."
+    tone="panel"
+  >
+    <div class="page-prose">
+      <p>Finance should not inherit weak evidence, unclear legitimacy, performative coalition commitment, hidden public-good subsidy, untested local delivery, or vague mandate.</p>
+      <p>EQVII enters only after the component can be stated as a lawful route, a responsible counterparty, a visible payment logic, a bounded obligation, and a correctable execution structure.</p>
+      <p>Late entry protects both the public-value purpose and responsible capital.</p>
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="stop-correction"
+    eyebrow="Stop and correction"
+    heading="A perimeter must be able to stop."
+  >
+    <ul class="simple-ledger">
+      {stopActions.map((action) => <li>{action}</li>)}
+    </ul>
+  </PageSection>
 </BaseLayout>

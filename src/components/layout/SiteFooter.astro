@@ -3,7 +3,13 @@ import { site } from '../../data/site';
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <p>{site.entityName} is maintained as part of {site.systemName}. Institutional information placeholder.</p>
+  <div class="container site-footer__inner">
+    <div>
+      <p>{site.entityName} operates inside {site.systemName} with capital under public-value constraint.</p>
+      <p>Public orientation only. Not an offering, mandate award, transaction approval, procurement process, or authorization to claim association.</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer navigation">
+      <a href="/disclosure/">Disclosure and Public Claim Note</a>
+    </nav>
   </div>
 </footer>

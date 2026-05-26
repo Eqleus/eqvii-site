@@ -1,0 +1,86 @@
+---
+interface Props {
+  letter?: string;
+  title: string;
+  purpose: string;
+  boundary: string;
+  primaryGate: string;
+}
+
+const { letter, title, purpose, boundary, primaryGate } = Astro.props;
+---
+
+<article class="vehicle-structure-card">
+  <header>
+    {letter && <span>{letter}</span>}
+    <h3>{title}</h3>
+  </header>
+  <dl>
+    <div>
+      <dt>Purpose</dt>
+      <dd>{purpose}</dd>
+    </div>
+    <div>
+      <dt>Boundary</dt>
+      <dd>{boundary}</dd>
+    </div>
+    <div>
+      <dt>Primary gate</dt>
+      <dd>{primaryGate}</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .vehicle-structure-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    min-width: 0;
+  }
+
+  .vehicle-structure-card header {
+    border-bottom: 1px solid var(--color-rule);
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: auto 1fr;
+    min-height: 5.25rem;
+    padding: var(--space-4);
+  }
+
+  .vehicle-structure-card span {
+    color: var(--color-steel);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .vehicle-structure-card h3 {
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .vehicle-structure-card dl {
+    margin: 0;
+  }
+
+  .vehicle-structure-card div {
+    padding: var(--space-4);
+  }
+
+  .vehicle-structure-card div + div {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .vehicle-structure-card dt {
+    color: var(--color-steel-dark);
+    font-size: 0.76rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .vehicle-structure-card dd {
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+</style>

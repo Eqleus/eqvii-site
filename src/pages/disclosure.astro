@@ -1,0 +1,120 @@
+---
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const nonClaimItems = [
+  'Offering memorandum',
+  'Prospectus',
+  'Term sheet',
+  'Mandate award',
+  'Procurement award',
+  'Transaction approval',
+  'Legal instrument',
+  'Investment advice',
+  'Financial advice',
+  'Solicitation',
+];
+
+const inquiryLimits = [
+  'Authorization',
+  'Priority',
+  'Endorsement',
+  'Transaction status',
+  'Capital commitment',
+  'Investment entitlement',
+  'Procurement status',
+  'Public claim',
+  'Association right',
+];
+
+const outsideLayers = [
+  'The Equilibrium System as a whole',
+  'Public-good finance and PRF layers',
+  'Protected Eqleus spaces',
+  '7WW7 coalition spaces',
+  'Equilibratory conclusions',
+];
+---
+
+<BaseLayout
+  title="Disclosure and Public Claim Note"
+  description="Institutional orientation note for EQVII Holdings. Public orientation only; not an offering, solicitation, transaction approval, or authorization."
+>
+  <PageHero
+    eyebrow="Disclosure"
+    heading="Disclosure and Public Claim Note"
+    body="This website provides institutional orientation and controlled public and counterparty due-diligence context for EQVII Holdings within The Equilibrium System."
+  />
+
+  <PageSection
+    id="orientation-only"
+    eyebrow="Orientation only"
+    heading="This site does not create transaction status."
+  >
+    <div class="record-grid">
+      {
+        nonClaimItems.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>No {item.toLowerCase()}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="identity-and-inquiry"
+    eyebrow="Identity and inquiry limits"
+    heading="No page authorizes identity use, association, priority, or public claim."
+    tone="panel"
+  >
+    <div class="record-grid">
+      {
+        inquiryLimits.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>No {item.toLowerCase()}</strong>
+          </article>
+        ))
+      }
+    </div>
+    <RuleNote>
+      <p>No inquiry creates authorization, priority, endorsement, transaction status, capital commitment, investment entitlement, procurement status, public claim, or association right.</p>
+    </RuleNote>
+  </PageSection>
+
+  <PageSection
+    id="vehicle-specific"
+    eyebrow="Vehicle-specific authority"
+    heading="EQVII transaction authority is specific, conditioned, and documented."
+  >
+    <div class="page-prose">
+      <p>Any EQVII transaction authority is vehicle-specific and subject to route, gate, diligence, public-value obligations, financing separation, and relevant legal documentation.</p>
+      <p>The Equilibrium System as a whole is not an investment product. Public-good finance, PRF layers, protected Eqleus spaces, 7WW7 coalition spaces, and Equilibratory conclusions remain outside EQVII unless a distinct execution component qualifies through the proper route.</p>
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="outside-eqvii"
+    eyebrow="Outside EQVII unless separately qualified"
+    heading="The perimeter protects the wider System from blurred claims."
+    tone="panel"
+  >
+    <ul class="simple-ledger">
+      {outsideLayers.map((item) => <li>{item}</li>)}
+    </ul>
+  </PageSection>
+
+  <PageSection
+    id="professional-review"
+    eyebrow="Professional review"
+    heading="Jurisdiction-sensitive questions require appropriate review."
+  >
+    <RuleNote>
+      <p>Legal, tax, regulatory, procurement, securities, investment, or jurisdiction-sensitive questions require appropriate professional review before any action.</p>
+    </RuleNote>
+  </PageSection>
+</BaseLayout>

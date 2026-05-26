@@ -1,0 +1,65 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="perimeter-strip" aria-label="Perimeter conditions">
+  {
+    items.map((item, index) => (
+      <li>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <strong>{item}</strong>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .perimeter-strip {
+    border-block: 1px solid var(--color-rule);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    margin: var(--space-8) 0 0;
+    padding: 0;
+  }
+
+  .perimeter-strip li {
+    min-height: 5.5rem;
+    padding: var(--space-4);
+  }
+
+  .perimeter-strip li + li {
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .perimeter-strip span {
+    color: var(--color-steel);
+    display: block;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-3);
+  }
+
+  .perimeter-strip strong {
+    color: var(--color-text);
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 42rem) {
+    .perimeter-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .perimeter-strip li + li {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule);
+    }
+  }
+</style>

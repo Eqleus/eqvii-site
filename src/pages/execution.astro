@@ -1,13 +1,132 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import GateMatrix from '../components/page/GateMatrix.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const executionChain = [
+  { number: '01', label: 'Evidence', detail: 'The component begins with evidence that can be reviewed without sponsor control.' },
+  { number: '02', label: 'Route', detail: 'A lawful route to adoption, procurement, mandate, or contracting is identified.' },
+  { number: '03', label: 'Mandate', detail: 'Authority to act is named and bounded.' },
+  { number: '04', label: 'Payment', detail: 'Payment logic is visible, honest, and tied to defined performance.' },
+  { number: '05', label: 'Delivery', detail: 'The execution owner and local readiness conditions are explicit.' },
+  { number: '06', label: 'Audit', detail: 'Milestones, reporting, and review records can be examined.' },
+  { number: '07', label: 'Correction', detail: 'Pause, remediation, and claim-correction rights are live.' },
+  { number: '08', label: 'Exit', detail: 'Responsible exit is possible if the structure fails its obligations.' },
+];
+
+const mandateQuestions = [
+  'Who has lawful authority?',
+  'What route allows adoption without bypassing fairness, competition, compliance, or accountability?',
+  'What budget, procurement, concession, service agreement, or contract form applies?',
+  'What anti-corruption and accountability clauses are required?',
+];
+
+const deliveryItems = [
+  'Local partners',
+  'Community capacity',
+  'Translation needs',
+  'Grievance routes',
+  'Inclusion and protection',
+  'Continuity conditions',
+  'Affected-community agency',
+];
+
+const incidentItems = [
+  'Reporting cadence',
+  'Milestone logic',
+  'Auditability',
+  'Incident escalation',
+  'Remediation',
+  'Pause conditions',
+  'Responsible exit',
+];
 ---
 
-<BaseLayout title="Execution" description="Placeholder page for execution information.">
-  <SectionShell>
-    <PageIntro title="Execution">
-      <p>Placeholder page for future execution information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="Execution Discipline"
+  description="EQVII execution discipline begins only where route, payment, delivery, audit, and correction can be defended."
+>
+  <PageHero
+    eyebrow="Execution discipline"
+    heading="Execution begins where the route can be defended."
+    body="Capital interest does not make a vehicle ready. Execution requires authority to act, a route to contract, a route to pay, delivery capacity, public-value obligations, and correction before launch language hardens into public claim."
+  />
+
+  <PageSection
+    id="readiness-to-execution"
+    eyebrow="From readiness to execution"
+    heading="Execution is a governed chain, not a launch event."
+  >
+    <GateMatrix gates={executionChain} />
+  </PageSection>
+
+  <PageSection
+    id="mandate-procurement"
+    eyebrow="Mandate and procurement translation"
+    heading="The route must survive fairness, compliance, and accountability review."
+    tone="panel"
+  >
+    <ul class="simple-ledger">
+      {mandateQuestions.map((question) => <li>{question}</li>)}
+    </ul>
+  </PageSection>
+
+  <PageSection
+    id="payment-logic"
+    eyebrow="Payment logic"
+    heading="Payment must be visible before the structure carries execution claim."
+  >
+    <div class="page-prose">
+      <p>Payment logic must define who pays, for what, under which milestones, with what standards, and what happens if conditions fail.</p>
+      <p>A vehicle may not rely on hidden public-good subsidy, vague sponsor support, or future political goodwill to appear durable.</p>
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="local-delivery"
+    eyebrow="Local delivery readiness"
+    heading="Delivery has to work where consequences land."
+    tone="panel"
+  >
+    <div class="record-grid">
+      {
+        deliveryItems.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="milestones-reporting"
+    eyebrow="Milestones and incident discipline"
+    heading="Accountable delivery requires rhythm, records, and escalation."
+  >
+    <div class="record-grid">
+      {
+        incidentItems.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="execution-refusal"
+    eyebrow="Execution refusal"
+    heading="EQVII should refuse when execution outruns the file."
+    tone="severe"
+  >
+    <RuleNote tone="severe">
+      <p>EQVII should pause, redirect, or decline where execution would outpace mandate, local readiness, ecological safety, technology/data integrity, media integrity, or public-value obligations.</p>
+    </RuleNote>
+  </PageSection>
 </BaseLayout>

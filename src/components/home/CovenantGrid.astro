@@ -1,0 +1,63 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="covenant-grid">
+  {
+    items.map((item, index) => (
+      <li>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <strong>{item}</strong>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .covenant-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 1px;
+    background: var(--color-rule);
+  }
+
+  .covenant-grid li {
+    background: var(--color-surface);
+    min-height: 8rem;
+    padding: var(--space-4);
+  }
+
+  .covenant-grid span {
+    color: var(--color-steel);
+    display: block;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-5);
+  }
+
+  .covenant-grid strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 58rem) {
+    .covenant-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .covenant-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

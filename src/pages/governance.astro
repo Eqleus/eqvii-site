@@ -1,13 +1,115 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import CovenantGrid from '../components/home/CovenantGrid.astro';
+import DecisionOutcomeTable from '../components/page/DecisionOutcomeTable.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const covenantItems = [
+  'Public-value purpose',
+  'Visible role and benefit',
+  'No legitimacy purchase',
+  'No extraction disguised as public value',
+  'No agenda control through capital',
+  'Mandate and procurement clarity',
+  'Local delivery readiness',
+  'Ethical technology and data gate',
+  'Ecological non-destruction gate',
+  'No war-economy capture',
+  'Media integrity gate',
+  'Correction and exit',
+];
+
+const controls = [
+  'Beneficial-ownership and control review',
+  'Counterparty diligence',
+  'Conflict-of-interest disclosure',
+  'Procurement-integrity review',
+  'Transaction-specific obligations',
+  'Technology, data, ecological, media, safeguarding, and conflict-sensitive red-line screens',
+  'Local delivery readiness',
+  'Affected-community protection requirements',
+  'Milestone, reporting, audit, incident, remediation, and exit protocols',
+  'Public-claim discipline',
+];
+
+const outcomes = [
+  {
+    label: 'Proceed',
+    body: 'The vehicle may move forward within stated obligations, disclosures, milestones, and stop rules.',
+  },
+  {
+    label: 'Proceed with conditions',
+    body: 'Specific risks must be resolved or monitored before launch, financing, public claim, scale, or additional counterparty entry.',
+  },
+  {
+    label: 'Pause',
+    body: 'Readiness is not sufficient. Evidence, mandate, local delivery, counterparty, ecological, technology/data, media, or public-value issues require further work.',
+  },
+  {
+    label: 'Redirect',
+    body: 'The matter belongs better to PRF, public budget, non-commercial support, Equilibratory work, 7WW7 coordination, Eqleus responsibility formation, or another partner.',
+  },
+  {
+    label: 'Decline or exit',
+    body: 'The vehicle would weaken Charter boundaries, legitimacy, public-value purpose, local delivery, ecological integrity, or trust.',
+  },
+];
 ---
 
-<BaseLayout title="Governance" description="Placeholder page for governance information.">
-  <SectionShell>
-    <PageIntro title="Governance">
-      <p>Placeholder page for future governance information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="Governance and Transaction Controls"
+  description="EQVII governance treats the public-value covenant as a condition for route, diligence, disclosure, correction, and exit."
+>
+  <PageHero
+    eyebrow="Governance and transaction controls"
+    heading="The covenant is not a statement. It is a transaction condition."
+    body="Every EQVII vehicle, counterparty relationship, media production vehicle, execution platform, or public-private mandate must satisfy public-value obligations strong enough to determine whether the work may proceed, pause, redirect, or stop."
+  />
+
+  <PageSection
+    id="public-value-covenant"
+    eyebrow="Public-value covenant"
+    heading="The covenant determines whether the work can proceed."
+  >
+    <CovenantGrid items={covenantItems} />
+  </PageSection>
+
+  <PageSection
+    id="control-environment"
+    eyebrow="Control environment"
+    heading="The file must survive control review before public claim."
+    tone="panel"
+  >
+    <div class="record-grid">
+      {
+        controls.map((control, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{control}</strong>
+          </article>
+        ))
+      }
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="decision-outcomes"
+    eyebrow="Decision outcomes"
+    heading="Governance must be able to say more than yes."
+  >
+    <DecisionOutcomeTable outcomes={outcomes} />
+  </PageSection>
+
+  <PageSection
+    id="public-claim-discipline"
+    eyebrow="Public-claim discipline"
+    heading="A public claim may not outrun the record."
+    tone="severe"
+  >
+    <RuleNote tone="severe">
+      <p>No vehicle may be described as broader, safer, more approved, more mature, more investable, or more publicly endorsed than the record supports.</p>
+    </RuleNote>
+  </PageSection>
 </BaseLayout>

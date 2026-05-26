@@ -1,14 +1,298 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import BoundaryLedger from '../components/home/BoundaryLedger.astro';
+import ControlledCTA from '../components/home/ControlledCTA.astro';
+import CovenantGrid from '../components/home/CovenantGrid.astro';
+import GateList from '../components/home/GateList.astro';
+import HeroPerimeter from '../components/home/HeroPerimeter.astro';
+import LedgerCompare from '../components/home/LedgerCompare.astro';
+import SectionRule from '../components/home/SectionRule.astro';
+import VehicleFamilyCard from '../components/home/VehicleFamilyCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+
+const heroStripItems = ['Evidence clear enough', 'Payment logic visible', 'Stop rules defined'];
+
+const executionBreak = {
+  left: {
+    title: 'Recognized',
+    items: ['Evidence exists', 'Public concern exists', 'Institutional interest exists', 'Public value is real'],
+  },
+  right: {
+    title: 'Not yet deliverable',
+    items: [
+      'No lawful vehicle',
+      'No payment route',
+      'No accountable operator',
+      'No correction rights',
+      'No defensible perimeter',
+    ],
+  },
+};
+
+const eqviiCards = [
+  {
+    title: 'Ring-fenced vehicles',
+    body: 'A vehicle may proceed only when its ledger, liability, role, and public-value obligation are separable.',
+  },
+  {
+    title: 'Execution mandates',
+    body: 'A mandate must name the counterparty, route, owner, correction rights, and limits of authority.',
+  },
+  {
+    title: 'Public-value operating platforms',
+    body: 'An operating platform must prove delivery discipline before it can carry capital discipline.',
+  },
+  {
+    title: 'Purposeful media vehicles',
+    body: 'Media production may enter only with cleared controls, integrity boundaries, and no hidden influence logic.',
+  },
+  {
+    title: 'Eligible enterprise participation',
+    body: 'Enterprise participation is bounded by role, benefit, disclosure, and public-value covenant.',
+  },
+  {
+    title: 'Correction and responsible exit',
+    body: 'If the ledger blurs, the route fails, or the obligation weakens, the structure must correct or close.',
+  },
+];
+
+const perimeterComparison = {
+  inside: [
+    'Ring-fenced vehicle',
+    'Mandate',
+    'Contracted execution',
+    'Public-value operating platform',
+    'Purposeful media vehicle with cleared controls',
+  ],
+  outside: [
+    'The Equilibrium System as an investment product',
+    'PRF public-good layers',
+    'Protected human spaces',
+    'Civic coalition spaces',
+    'Evidence conclusions',
+    'Sponsor rewards',
+    'Lobbying or influence work',
+  ],
+};
+
+const gates = [
+  { number: '01', label: 'Lawful route' },
+  { number: '02', label: 'Clear counterparty' },
+  { number: '03', label: 'Payment logic' },
+  { number: '04', label: 'Mandate or procurement path' },
+  { number: '05', label: 'Execution owner' },
+  { number: '06', label: 'Public-value obligation' },
+  { number: '07', label: 'Financing separation' },
+  { number: '08', label: 'Downside containment' },
+  { number: '09', label: 'Disclosure discipline' },
+  { number: '10', label: 'Stop / correction rights' },
+];
+
+const vehicleFamilies = [
+  {
+    title: 'Public-value operating company',
+    purpose: 'Operates a defined function when public-value delivery requires enterprise discipline.',
+    boundary: 'No protected legitimacy is transferred to the company balance sheet.',
+    primaryGate: 'Visible role and public-value obligation.',
+  },
+  {
+    title: 'Public-private implementation mandate',
+    purpose: 'Carries accountable delivery where a lawful public or civic route is explicit.',
+    boundary: 'No agenda control through capital, financial support, or soft influence.',
+    primaryGate: 'Mandate or procurement clarity.',
+  },
+  {
+    title: 'Resilience and essential-systems vehicle',
+    purpose: 'Supports execution around critical systems after readiness and counterparty tests.',
+    boundary: 'No hidden subsidy, weak counterparty, or unmanaged downside exposure.',
+    primaryGate: 'Downside containment.',
+  },
+  {
+    title: 'Ethical technology and data platform',
+    purpose: 'Builds or governs technology where data use, consent, and accountability can be defended.',
+    boundary: 'No extraction disguised as public value and no protected-space origination.',
+    primaryGate: 'Ethical technology and data gate.',
+  },
+  {
+    title: 'Ecological restoration or transition platform',
+    purpose: 'Structures delivery where ecological claims, duties, and payment route can be audited.',
+    boundary: 'No destruction offset by language and no unsupported environmental claim.',
+    primaryGate: 'Ecological non-destruction gate.',
+  },
+  {
+    title: 'Purposeful media production vehicle',
+    purpose: 'Produces or operates media where integrity controls and commercial discipline are both clear.',
+    boundary: 'No purchased narrative, concealed sponsor control, or civic legitimacy transfer.',
+    primaryGate: 'Media integrity gate.',
+  },
+];
+
+const covenantItems = [
+  'Public-value purpose',
+  'Visible role and benefit',
+  'No legitimacy purchase',
+  'No extraction disguised as public value',
+  'No agenda control through capital',
+  'Mandate and procurement clarity',
+  'Local delivery readiness',
+  'Ethical technology and data gate',
+  'Ecological non-destruction gate',
+  'Media integrity gate',
+  'Correction and exit',
+];
+
+const boundaryLedger = {
+  prf: {
+    title: 'PRF public-good side',
+    items: [
+      'Prevention',
+      'Repair',
+      'Verification',
+      'Trust infrastructure',
+      'Local readiness',
+      'Affected-community participation',
+      'Safeguarding',
+      'Measurement readiness',
+    ],
+  },
+  eqvii: {
+    title: 'EQVII execution side',
+    items: [
+      'Ring-fenced vehicles',
+      'Contracted execution',
+      'Enterprise platforms',
+      'Mandate structures',
+      'Purposeful media vehicles where commercial or operating discipline is appropriate',
+    ],
+  },
+};
 ---
 
-<BaseLayout title="Home" description="Foundational placeholder page for EQVII Holdings.">
-  <SectionShell>
-    <PageIntro title={site.entityName}>
-      <p>{site.shortPositioning}. Placeholder institutional overview.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="Capital under public-value constraint"
+  titleTemplate="entityFirst"
+  description="Ring-fenced vehicles, execution mandates, and accountable delivery discipline within The Equilibrium System. Public orientation only; not an offering or transaction approval."
+>
+  <HeroPerimeter
+    eyebrow="EQVII Holdings / The Equilibrium System"
+    headline="Capital enters only where the perimeter can hold."
+    subline="Late-chain ethical execution and capital architecture for ring-fenced vehicles, disciplined participation, and accountable delivery under public-interest constraint."
+    stripItems={heroStripItems}
+  />
+
+  <SectionRule
+    id="execution-break"
+    eyebrow="The execution break"
+    heading="Some public-value work fails after agreement, before delivery."
+    lead="Public-value work often reaches diagnosis, concern, and institutional interest before it has a lawful vehicle, accountable operator, payment route, correction rights, or defensible execution perimeter."
+  >
+    <LedgerCompare left={executionBreak.left} right={executionBreak.right} />
+  </SectionRule>
+
+  <SectionRule
+    id="what-eqvii-is"
+    eyebrow="What EQVII is"
+    heading="The governed route from readiness to accountable execution."
+    lead="EQVII structures eligible ring-fenced vehicles, execution mandates, operating platforms, public-private implementation structures, purposeful media vehicles, and enterprise participation only where the role, route, obligation, risk, and correction rights can be made explicit."
+    tone="panel"
+  >
+    <div class="home-grid">
+      {
+        eqviiCards.map((card) => (
+          <article class="home-card">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </SectionRule>
+
+  <SectionRule
+    id="perimeter-rule"
+    eyebrow="The perimeter rule"
+    heading="The System may be financeable. It is not itself the investment product."
+    lead="Investability exists only through a defined vehicle, mandate, contract, or execution structure. EQVII does not convert the whole Equilibrium System, its protected spaces, its civic legitimacy, or its evidence work into an investment product."
+  >
+    <div class="comparison-list">
+      <article>
+        <h3>Inside the perimeter</h3>
+        <ul>
+          {perimeterComparison.inside.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article>
+        <h3>Outside the perimeter</h3>
+        <ul>
+          {perimeterComparison.outside.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </SectionRule>
+
+  <SectionRule
+    id="investable-perimeter-test"
+    eyebrow="Investable perimeter test"
+    heading="A component enters EQVII only when the file can answer for itself."
+  >
+    <GateList gates={gates} />
+    <p class="review-note">
+      If these conditions cannot be stated in a reviewable file, the work remains outside EQVII until it matures.
+    </p>
+  </SectionRule>
+
+  <SectionRule
+    id="vehicle-families"
+    eyebrow="Vehicle families"
+    heading="Vehicle families are built around discipline, not appetite."
+    tone="panel"
+  >
+    <div class="vehicle-family-grid">
+      {
+        vehicleFamilies.map((family) => (
+          <VehicleFamilyCard
+            title={family.title}
+            purpose={family.purpose}
+            boundary={family.boundary}
+            primaryGate={family.primaryGate}
+          />
+        ))
+      }
+    </div>
+  </SectionRule>
+
+  <SectionRule
+    id="public-value-covenant"
+    eyebrow="Public-value covenant"
+    heading="The covenant is not a statement. It is a transaction condition."
+  >
+    <CovenantGrid items={covenantItems} />
+  </SectionRule>
+
+  <SectionRule
+    id="prf-eqvii-boundary"
+    eyebrow="PRF / EQVII boundary"
+    heading="Public-good finance and EQVII execution must remain visibly separate."
+    lead="The same challenge area may contain both public-good finance and a distinct execution component eligible for ring-fenced EQVII review. It may not contain a blurred ledger."
+    tone="panel"
+  >
+    <BoundaryLedger left={boundaryLedger.prf} right={boundaryLedger.eqvii} />
+  </SectionRule>
+
+  <SectionRule
+    id="refusal-discipline"
+    eyebrow="Refusal discipline"
+    heading="A serious perimeter knows how to refuse."
+    tone="severe"
+  >
+    <p class="severe-statement">Capital does not create legitimacy. It inherits it or it distorts it.</p>
+    <p class="severe-body">
+      EQVII declines or redirects work where revenue logic is unclear, subsidy is hidden, counterparties cannot withstand scrutiny, protected spaces become origination channels, public-good work belongs to grant or public-budget routes, or capital would buy legitimacy.
+    </p>
+  </SectionRule>
+
+  <ControlledCTA
+    heading="Begin with the perimeter."
+    subline="A routed inquiry is not a transaction claim. It is the first step in determining whether a component belongs inside or outside EQVII."
+    note="An inquiry does not create investment entitlement, legal mandate, procurement award, capital commitment, endorsement, priority, association right, or public claim."
+  />
 </BaseLayout>

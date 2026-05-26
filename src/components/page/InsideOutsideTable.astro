@@ -1,0 +1,82 @@
+---
+interface Props {
+  insideTitle: string;
+  outsideTitle: string;
+  insideItems: string[];
+  outsideItems: string[];
+}
+
+const { insideTitle, outsideTitle, insideItems, outsideItems } = Astro.props;
+const columns = [
+  { title: insideTitle, items: insideItems },
+  { title: outsideTitle, items: outsideItems },
+];
+---
+
+<div class="inside-outside-table">
+  {
+    columns.map((column) => (
+      <article>
+        <h3>{column.title}</h3>
+        <ul>
+          {column.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .inside-outside-table {
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inside-outside-table article {
+    background: var(--color-surface);
+    min-width: 0;
+    padding: var(--space-5);
+  }
+
+  .inside-outside-table article + article {
+    background: var(--color-background);
+    border-left: 1px solid var(--color-rule-strong);
+  }
+
+  .inside-outside-table h3 {
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .inside-outside-table ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .inside-outside-table li {
+    color: var(--color-muted);
+    line-height: 1.5;
+    padding-block: var(--space-3);
+  }
+
+  .inside-outside-table li + li {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  @media (max-width: 46rem) {
+    .inside-outside-table {
+      grid-template-columns: 1fr;
+    }
+
+    .inside-outside-table article + article {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule-strong);
+    }
+  }
+</style>

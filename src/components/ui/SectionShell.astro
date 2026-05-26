@@ -1,12 +1,14 @@
 ---
 interface Props {
   class?: string;
+  id?: string;
 }
 
 const className = ['section-shell', Astro.props.class].filter(Boolean).join(' ');
+const { id } = Astro.props;
 ---
 
-<section class={className}>
+<section id={id} class={className}>
   <div class="container">
     <slot />
   </div>

@@ -1,0 +1,59 @@
+---
+interface Outcome {
+  label: string;
+  body: string;
+}
+
+interface Props {
+  outcomes: Outcome[];
+}
+
+const { outcomes } = Astro.props;
+---
+
+<div class="decision-outcome-table">
+  {
+    outcomes.map((outcome) => (
+      <article>
+        <h3>{outcome.label}</h3>
+        <p>{outcome.body}</p>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .decision-outcome-table {
+    border: 1px solid var(--color-rule-strong);
+  }
+
+  .decision-outcome-table article {
+    background: var(--color-surface);
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: minmax(9rem, 0.36fr) 1fr;
+    min-width: 0;
+    padding: var(--space-4);
+  }
+
+  .decision-outcome-table article + article {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .decision-outcome-table h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .decision-outcome-table p {
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .decision-outcome-table article {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

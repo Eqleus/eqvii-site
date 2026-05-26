@@ -1,0 +1,94 @@
+---
+interface LedgerColumn {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  left: LedgerColumn;
+  right: LedgerColumn;
+}
+
+const { left, right } = Astro.props;
+const columns = [left, right];
+---
+
+<div class="ledger-compare">
+  {
+    columns.map((column) => (
+      <article class="ledger-compare__column">
+        <h3>{column.title}</h3>
+        <ul>
+          {column.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .ledger-compare {
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ledger-compare__column {
+    background: var(--color-surface);
+    min-height: 24rem;
+    padding: var(--space-5);
+  }
+
+  .ledger-compare__column + .ledger-compare__column {
+    background: var(--color-background);
+    border-left: 1px solid var(--color-rule-strong);
+  }
+
+  .ledger-compare h3 {
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 0.9rem;
+    margin: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .ledger-compare ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .ledger-compare li {
+    align-items: start;
+    color: var(--color-muted);
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 0.8rem 1fr;
+    line-height: 1.45;
+    padding-block: var(--space-3);
+  }
+
+  .ledger-compare li::before {
+    background: var(--color-steel);
+    content: "";
+    height: 1px;
+    margin-top: 0.75em;
+    width: 0.8rem;
+  }
+
+  @media (max-width: 42rem) {
+    .ledger-compare {
+      grid-template-columns: 1fr;
+    }
+
+    .ledger-compare__column {
+      min-height: 0;
+    }
+
+    .ledger-compare__column + .ledger-compare__column {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule-strong);
+    }
+  }
+</style>

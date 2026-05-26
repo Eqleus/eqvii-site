@@ -1,13 +1,91 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import BoundaryLedger from '../components/home/BoundaryLedger.astro';
+import InsideOutsideTable from '../components/page/InsideOutsideTable.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const prfItems = [
+  'Prevention',
+  'Repair',
+  'Verification',
+  'Trust infrastructure',
+  'Local readiness',
+  'Affected-community participation',
+  'Safeguarding',
+  'Measurement readiness',
+  'Adoption support',
+];
+
+const eqviiItems = [
+  'Lawful payment logic',
+  'Ring-fenced vehicle discipline',
+  'Clear counterparties',
+  'Public-value obligations',
+  'Execution controls',
+  'Auditability',
+  'Stop and correction rights',
+];
 ---
 
-<BaseLayout title="PRF Boundary" description="Placeholder page for PRF boundary information.">
-  <SectionShell>
-    <PageIntro title="PRF Boundary">
-      <p>Placeholder page for future PRF boundary information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="PRF / EQVII Boundary"
+  description="Public-good finance and EQVII execution must remain visibly separate."
+>
+  <PageHero
+    eyebrow="PRF / EQVII boundary"
+    heading="Public-good finance and EQVII execution must remain visibly separate."
+    body="The same challenge area may contain both public-good finance and a distinct execution component eligible for ring-fenced EQVII review. It may not contain a blurred ledger."
+  />
+
+  <PageSection
+    id="why-boundary-matters"
+    eyebrow="Why the boundary matters"
+    heading="A blurred ledger damages trust."
+  >
+    <div class="page-prose">
+      <p>Confusing grant, public-good, catalytic, contracted, and return-seeking layers can turn public need into private advantage.</p>
+      <p>The boundary protects public trust, public-good finance, responsible capital, and the wider Equilibrium System from disguised transfer or softened obligation.</p>
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="prf-eqvii-sides"
+    eyebrow="Separated layers"
+    heading="PRF and EQVII can coordinate. They may not merge."
+    tone="panel"
+  >
+    <BoundaryLedger
+      left={{ title: 'PRF side', items: prfItems }}
+      right={{ title: 'EQVII side', items: eqviiItems }}
+    />
+  </PageSection>
+
+  <PageSection
+    id="same-challenge"
+    eyebrow="Same challenge, separate ledger"
+    heading="One challenge area may require two finance logics."
+  >
+    <InsideOutsideTable
+      insideTitle="PRF may be needed for"
+      outsideTitle="EQVII may be needed for"
+      insideItems={['Prevention', 'Readiness', 'Repair', 'Safeguarding', 'Measurement preparation']}
+      outsideItems={['Contracted service', 'Operating vehicle', 'Execution platform', 'Mandate structure', 'Commercially disciplined media vehicle']}
+    />
+    <RuleNote>
+      <p>The layers may coordinate around one challenge area. They may not merge into a blurred return case.</p>
+    </RuleNote>
+  </PageSection>
+
+  <PageSection
+    id="anti-circumvention"
+    eyebrow="Anti-circumvention rule"
+    heading="Public-good layers cannot be forced into a vehicle to make the file look stronger."
+    tone="severe"
+  >
+    <RuleNote tone="severe">
+      <p>No public-good layer should be forced into EQVII to create false investability. No EQVII vehicle should use PRF proximity to purchase legitimacy, de-risk private benefit invisibly, or soften public-value obligations.</p>
+    </RuleNote>
+  </PageSection>
 </BaseLayout>

@@ -7,10 +7,16 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  titleTemplate?: 'default' | 'entityFirst' | 'plain';
 }
 
-const { title, description } = Astro.props;
-const pageTitle = `${title} | ${site.entityName}`;
+const { title, description, titleTemplate = 'default' } = Astro.props;
+const pageTitle =
+  titleTemplate === 'plain'
+    ? title
+    : titleTemplate === 'entityFirst'
+      ? `${site.entityName} - ${title}`
+      : `${title} | ${site.entityName}`;
 const canonicalUrl = site.domain.canonicalBaseUrl
   ? new URL(Astro.url.pathname, site.domain.canonicalBaseUrl).toString()
   : undefined;
@@ -31,6 +37,8 @@ const canonicalUrl = site.domain.canonicalBaseUrl
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     {site.social.image && <meta property="og:image" content={site.social.image} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
   </head>
   <body>
     <div class="site-shell">

@@ -8,7 +8,7 @@ const { title, eyebrow } = Astro.props;
 ---
 
 <div class="page-intro flow">
-  {eyebrow && <p>{eyebrow}</p>}
+  {eyebrow && <p class="page-intro__eyebrow">{eyebrow}</p>}
   <h1>{title}</h1>
   <slot />
 </div>

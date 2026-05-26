@@ -1,0 +1,148 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  body: string;
+  actions?: Action[];
+}
+
+const { eyebrow, heading, body, actions = [] } = Astro.props;
+---
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__inner">
+    <div class="page-hero__copy">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 id="page-title">{heading}</h1>
+      <p>{body}</p>
+      {
+        actions.length > 0 && (
+          <div class="page-hero__actions" aria-label="Page actions">
+            {actions.map((action) => (
+              <ButtonLink href={action.href} variant={action.variant ?? 'primary'}>
+                {action.label}
+              </ButtonLink>
+            ))}
+          </div>
+        )
+      }
+    </div>
+    <aside class="page-hero__file" aria-label="Perimeter file marker">
+      <span>Review file</span>
+      <strong>Perimeter first</strong>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background:
+      linear-gradient(90deg, var(--color-rule) 1px, transparent 1px) 0 0 / 4.5rem 4.5rem,
+      linear-gradient(var(--color-rule-soft) 1px, transparent 1px) 0 0 / 100% 4.5rem,
+      var(--color-background);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .page-hero__inner {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 19rem);
+    padding-block: var(--space-9);
+  }
+
+  .page-hero__copy {
+    max-width: 53rem;
+    min-width: 0;
+  }
+
+  .page-hero h1 {
+    font-size: 3.8rem;
+    line-height: 1.02;
+    margin: var(--space-5) 0 0;
+    max-width: 13ch;
+  }
+
+  .page-hero p:not(.eyebrow) {
+    color: var(--color-muted);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin: var(--space-6) 0 0;
+    max-width: 48rem;
+  }
+
+  .page-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+  }
+
+  .page-hero__file {
+    align-self: end;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    min-width: 0;
+    padding: var(--space-4);
+  }
+
+  .page-hero__file span {
+    color: var(--color-muted);
+    display: block;
+    font-size: 0.78rem;
+    margin-bottom: var(--space-6);
+  }
+
+  .page-hero__file strong {
+    display: block;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  @media (max-width: 58rem) {
+    .page-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .page-hero h1 {
+      font-size: 3rem;
+    }
+
+    .page-hero__file {
+      align-self: stretch;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .page-hero__inner {
+      padding-block: var(--space-8);
+    }
+
+    .page-hero__copy,
+    .page-hero p:not(.eyebrow),
+    .page-hero__file {
+      max-width: 21rem;
+    }
+
+    .page-hero h1 {
+      font-size: 2.35rem;
+      max-width: 10ch;
+    }
+
+    .page-hero p:not(.eyebrow) {
+      font-size: 1.04rem;
+    }
+
+    .page-hero__actions {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

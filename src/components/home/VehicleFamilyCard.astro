@@ -1,0 +1,70 @@
+---
+interface Props {
+  title: string;
+  purpose: string;
+  boundary: string;
+  primaryGate: string;
+}
+
+const { title, purpose, boundary, primaryGate } = Astro.props;
+---
+
+<article class="vehicle-family-card">
+  <h3>{title}</h3>
+  <dl>
+    <div>
+      <dt>Purpose</dt>
+      <dd>{purpose}</dd>
+    </div>
+    <div>
+      <dt>Boundary</dt>
+      <dd>{boundary}</dd>
+    </div>
+    <div>
+      <dt>Primary gate</dt>
+      <dd>{primaryGate}</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .vehicle-family-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    display: grid;
+    min-height: 100%;
+    min-width: 0;
+  }
+
+  .vehicle-family-card h3 {
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 1.05rem;
+    margin: 0;
+    padding: var(--space-4);
+  }
+
+  .vehicle-family-card dl {
+    margin: 0;
+  }
+
+  .vehicle-family-card div {
+    padding: var(--space-4);
+  }
+
+  .vehicle-family-card div + div {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .vehicle-family-card dt {
+    color: var(--color-steel-dark);
+    font-size: 0.76rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .vehicle-family-card dd {
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+</style>

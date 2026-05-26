@@ -1,13 +1,145 @@
 ---
-import SectionShell from '../components/ui/SectionShell.astro';
-import PageIntro from '../components/ui/PageIntro.astro';
+import PageHero from '../components/page/PageHero.astro';
+import PageSection from '../components/page/PageSection.astro';
+import RuleNote from '../components/page/RuleNote.astro';
+import VehicleStructureCard from '../components/page/VehicleStructureCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const vehicleFamilies = [
+  {
+    letter: 'A',
+    title: 'Public-value operating company',
+    purpose: 'Delivers an evidence-cleared service, technology, infrastructure input, production capability, or implementation function.',
+    boundary: 'Public trust-building, community consent, protected spaces, and unpriced public-good layers may not be hidden inside the return case.',
+    primaryGate: 'Payment logic and public-value obligation.',
+  },
+  {
+    letter: 'B',
+    title: 'Public-private implementation mandate',
+    purpose: 'Carries work where a public authority, development institution, coalition, or institutional buyer has a lawful mandate or contract route.',
+    boundary: 'Mandate legitimacy, procurement fairness, affected-community agency, and public accountability cannot be bypassed.',
+    primaryGate: 'Mandate and procurement clarity.',
+  },
+  {
+    letter: 'C',
+    title: 'Resilience and essential-systems vehicle',
+    purpose: 'Supports measurable resilience in health, education, water, food, climate, energy, digital, housing, or civic infrastructure.',
+    boundary: 'Access, continuity, inclusion/protection, ecological non-destruction, and local delivery readiness must be explicit.',
+    primaryGate: 'Local delivery and continuity.',
+  },
+  {
+    letter: 'D',
+    title: 'Ethical technology and data platform',
+    purpose: 'Improves delivery, learning, cyber resilience, public understanding, or public-value measurement.',
+    boundary: 'No exploitative data extraction, surveillance abuse, AI manipulation, opaque automated harm, or sponsor-controlled evidence.',
+    primaryGate: 'Ethical technology and data gate.',
+  },
+  {
+    letter: 'E',
+    title: 'Ecological restoration or transition platform',
+    purpose: 'Supports restoration, adaptation, circular production, clean infrastructure, water stewardship, biodiversity protection, or climate-resilience execution.',
+    boundary: 'No severe or irreversible ecological destruction; no climate or nature claim that outruns evidence and measurement.',
+    primaryGate: 'Ecological non-destruction.',
+  },
+  {
+    letter: 'F',
+    title: 'Purposeful media production vehicle',
+    purpose: 'Supports public understanding, civic learning, professional learning, or human-consequence storytelling where lawful commercial or operating discipline is appropriate.',
+    boundary: 'No emotional manipulation, reputation repair, donor promotion, political campaigning, sponsor-controlled narrative, or public claims beyond evidence.',
+    primaryGate: 'Media integrity.',
+  },
+  {
+    letter: 'G',
+    title: 'Purely protective or grant-dependent public-good work',
+    purpose: 'Usually belongs outside EQVII.',
+    boundary: 'Do not force false investability.',
+    primaryGate: 'Redirect to PRF, public budgets, philanthropy, or other non-commercial support.',
+  },
+];
+
+const durabilityItems = [
+  'Institutionally owned',
+  'Locally usable where relevant',
+  'Financially honest',
+  'Operationally auditable',
+  'Ecologically safe',
+  'Socially legitimate',
+  'Correctable over time',
+];
 ---
 
-<BaseLayout title="Vehicles" description="Placeholder page for vehicle information.">
-  <SectionShell>
-    <PageIntro title="Vehicles">
-      <p>Placeholder page for future vehicle information.</p>
-    </PageIntro>
-  </SectionShell>
+<BaseLayout
+  title="Vehicle Families"
+  description="EQVII vehicle families are ring-fenced execution structures for defined components that pass perimeter review."
+>
+  <PageHero
+    eyebrow="Vehicle families"
+    heading="Vehicle families are built around discipline, not appetite."
+    body="EQVII may structure lawful vehicles and execution platforms only when the role, route, counterparty, payment logic, public-value obligation, and correction rights can be made explicit."
+  />
+
+  <PageSection
+    id="vehicle-specific-authority"
+    eyebrow="Vehicle-specific authority"
+    heading="A vehicle is not proof that the whole System is investable."
+  >
+    <div class="page-prose">
+      <p>A vehicle is a ring-fenced structure for a defined component that has passed the relevant perimeter tests. Its authority is specific, bounded, reviewable, and correctable.</p>
+      <p>It does not carry the legitimacy of protected spaces, public-good layers, evidence conclusions, coalition work, or the wider Equilibrium System into a return case.</p>
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="vehicle-family-matrix"
+    eyebrow="Vehicle family matrix"
+    heading="Structure families, not offerings."
+    lead="These families describe possible execution structures. They are not product descriptions, solicitations, or claims of availability."
+    tone="panel"
+  >
+    <div class="structure-grid">
+      {
+        vehicleFamilies.map((family) => (
+          <VehicleStructureCard
+            letter={family.letter}
+            title={family.title}
+            purpose={family.purpose}
+            boundary={family.boundary}
+            primaryGate={family.primaryGate}
+          />
+        ))
+      }
+    </div>
+  </PageSection>
+
+  <PageSection
+    id="durability"
+    eyebrow="Durability by design"
+    heading="A vehicle is not mature because it can be launched."
+  >
+    <div class="record-grid">
+      {
+        durabilityItems.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </article>
+        ))
+      }
+    </div>
+    <RuleNote>
+      <p>Maturity means the structure can withstand use, audit, correction, and scrutiny after launch language has faded.</p>
+    </RuleNote>
+  </PageSection>
+
+  <PageSection
+    id="first-vehicle-posture"
+    eyebrow="First vehicle posture"
+    heading="Prove vehicle discipline before scale."
+    tone="panel"
+  >
+    <div class="page-prose">
+      <p>Phase 1 should begin with one or two bounded structures, clean firewalls, explicit PRF separation, disciplined counterparties, auditable execution, and a record strong enough to survive sovereign, fiduciary, and public scrutiny.</p>
+      <p>The first vehicles should teach the control environment how to hold before EQVII broadens structure families or execution volume.</p>
+    </div>
+  </PageSection>
 </BaseLayout>

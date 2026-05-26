@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  items: string[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<aside class="inquiry-boundary-panel">
+  <h3>{title}</h3>
+  <ul>
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+</aside>
+
+<style>
+  .inquiry-boundary-panel {
+    background: var(--color-text);
+    color: var(--color-surface);
+    padding: var(--space-5);
+  }
+
+  .inquiry-boundary-panel h3 {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 28%, transparent);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .inquiry-boundary-panel ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .inquiry-boundary-panel li {
+    color: var(--color-severe-muted);
+    line-height: 1.5;
+    padding-block: var(--space-3);
+  }
+
+  .inquiry-boundary-panel li + li {
+    border-top: 1px solid color-mix(in srgb, var(--color-surface) 16%, transparent);
+  }
+</style>

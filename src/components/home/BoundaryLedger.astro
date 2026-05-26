@@ -1,0 +1,84 @@
+---
+interface LedgerSide {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  left: LedgerSide;
+  right: LedgerSide;
+}
+
+const { left, right } = Astro.props;
+const sides = [left, right];
+---
+
+<div class="boundary-ledger">
+  {
+    sides.map((side) => (
+      <article>
+        <h3>{side.title}</h3>
+        <ul>
+          {side.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .boundary-ledger {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boundary-ledger article {
+    min-height: 28rem;
+    padding: var(--space-5);
+  }
+
+  .boundary-ledger article + article {
+    border-left: 4px double var(--color-rule-strong);
+  }
+
+  .boundary-ledger h3 {
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .boundary-ledger ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .boundary-ledger li {
+    color: var(--color-muted);
+    padding-block: var(--space-3);
+  }
+
+  .boundary-ledger li + li {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  @media (max-width: 46rem) {
+    .boundary-ledger {
+      grid-template-columns: 1fr;
+    }
+
+    .boundary-ledger article {
+      min-height: 0;
+    }
+
+    .boundary-ledger article + article {
+      border-left: 0;
+      border-top: 4px double var(--color-rule-strong);
+    }
+  }
+</style>

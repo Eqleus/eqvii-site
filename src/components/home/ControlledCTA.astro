@@ -1,0 +1,85 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+
+interface Props {
+  heading: string;
+  subline: string;
+  note: string;
+}
+
+const { heading, subline, note } = Astro.props;
+---
+
+<section class="controlled-cta" aria-labelledby="controlled-cta-heading">
+  <div class="container controlled-cta__inner">
+    <div>
+      <p class="eyebrow">Routed inquiry</p>
+      <h2 id="controlled-cta-heading">{heading}</h2>
+      <p>{subline}</p>
+    </div>
+    <div class="controlled-cta__action">
+      <ButtonLink href="/inquiry/">Begin a routed inquiry</ButtonLink>
+      <p>{note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .controlled-cta {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-rule);
+    padding-block: var(--space-9);
+  }
+
+  .controlled-cta__inner {
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 24rem);
+    padding: var(--space-6);
+  }
+
+  .controlled-cta__inner > * {
+    min-width: 0;
+  }
+
+  .controlled-cta h2 {
+    font-size: 2.5rem;
+    line-height: 1.05;
+    margin: var(--space-5) 0 0;
+  }
+
+  .controlled-cta p:not(.eyebrow) {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: var(--space-5) 0 0;
+  }
+
+  .controlled-cta__action {
+    border-left: 1px solid var(--color-rule);
+    padding-left: var(--space-6);
+  }
+
+  .controlled-cta__action p {
+    font-size: 0.88rem;
+  }
+
+  @media (max-width: 52rem) {
+    .controlled-cta__inner {
+      grid-template-columns: 1fr;
+      padding: var(--space-5);
+    }
+
+    .controlled-cta__action {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule);
+      padding-left: 0;
+      padding-top: var(--space-5);
+    }
+
+    .controlled-cta h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
