@@ -1,0 +1,105 @@
+---
+interface DocketItem {
+  title: string;
+  body: string;
+}
+
+interface Props {
+  items: DocketItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="vehicle-readiness-docket">
+  <div class="vehicle-readiness-docket__header">
+    <span>Vehicle readiness docket</span>
+    <span>Review before structure</span>
+  </div>
+  <div class="vehicle-readiness-docket__items">
+    {
+      items.map((item, index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .vehicle-readiness-docket {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+  }
+
+  .vehicle-readiness-docket__header {
+    align-items: center;
+    border-bottom: 1px solid var(--color-rule-strong);
+    color: var(--color-muted);
+    display: flex;
+    font-size: 0.78rem;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .vehicle-readiness-docket__items {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicle-readiness-docket article {
+    min-width: 0;
+    padding: var(--space-5);
+  }
+
+  .vehicle-readiness-docket article:nth-child(even) {
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .vehicle-readiness-docket article:nth-child(n + 3) {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .vehicle-readiness-docket article > span {
+    color: var(--color-steel);
+    display: block;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-5);
+  }
+
+  .vehicle-readiness-docket h3 {
+    font-size: 1.12rem;
+    line-height: 1.24;
+    margin: 0;
+  }
+
+  .vehicle-readiness-docket p {
+    color: var(--color-muted);
+    line-height: 1.58;
+    margin: var(--space-4) 0 0;
+  }
+
+  @media (max-width: 44rem) {
+    .vehicle-readiness-docket__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .vehicle-readiness-docket__items {
+      grid-template-columns: 1fr;
+    }
+
+    .vehicle-readiness-docket article:nth-child(even) {
+      border-left: 0;
+    }
+
+    .vehicle-readiness-docket article:nth-child(n + 2) {
+      border-top: 1px solid var(--color-rule);
+    }
+  }
+</style>

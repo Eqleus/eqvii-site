@@ -1,0 +1,87 @@
+---
+interface Decision {
+  label: string;
+  body?: string;
+}
+
+interface Props {
+  items: Decision[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="decision-bar" aria-label="Governance decision outcomes">
+  {
+    items.map((item, index) => (
+      <article>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <h3>{item.label}</h3>
+        {item.body && <p>{item.body}</p>}
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .decision-bar {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .decision-bar article {
+    min-width: 0;
+    padding: var(--space-4);
+  }
+
+  .decision-bar article + article {
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .decision-bar span {
+    color: var(--color-steel);
+    display: block;
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-4);
+  }
+
+  .decision-bar h3 {
+    font-size: 1rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .decision-bar p {
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin: var(--space-3) 0 0;
+  }
+
+  @media (max-width: 64rem) {
+    .decision-bar {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .decision-bar article + article {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .decision-bar article:nth-child(even) {
+      border-left: 1px solid var(--color-rule);
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .decision-bar {
+      grid-template-columns: 1fr;
+    }
+
+    .decision-bar article:nth-child(even) {
+      border-left: 0;
+    }
+  }
+</style>

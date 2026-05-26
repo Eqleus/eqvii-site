@@ -45,6 +45,17 @@ const { gates } = Astro.props;
     min-height: 5rem;
     min-width: 0;
     padding: var(--space-4);
+    position: relative;
+  }
+
+  .gate-matrix li::before {
+    background: var(--eqvii-signal);
+    content: "";
+    left: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
   }
 
   .gate-matrix span {

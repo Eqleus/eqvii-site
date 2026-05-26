@@ -1,0 +1,119 @@
+---
+interface LedgerSide {
+  title: string;
+  summary: string;
+  items: string[];
+}
+
+interface Props {
+  left: LedgerSide;
+  right: LedgerSide;
+  rule: string;
+}
+
+const { left, right, rule } = Astro.props;
+---
+
+<div class="separated-ledger">
+  <article>
+    <p>{left.title}</p>
+    <h3>{left.summary}</h3>
+    <ul>
+      {left.items.map((item) => <li>{item}</li>)}
+    </ul>
+  </article>
+  <div class="separated-ledger__rule" aria-label={rule}>
+    <span>{rule}</span>
+  </div>
+  <article>
+    <p>{right.title}</p>
+    <h3>{right.summary}</h3>
+    <ul>
+      {right.items.map((item) => <li>{item}</li>)}
+    </ul>
+  </article>
+</div>
+
+<style>
+  .separated-ledger {
+    align-items: stretch;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.32fr) minmax(0, 1fr);
+  }
+
+  .separated-ledger article {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    min-width: 0;
+    padding: var(--space-5);
+  }
+
+  .separated-ledger article > p {
+    color: var(--color-steel);
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-5);
+    text-transform: uppercase;
+  }
+
+  .separated-ledger h3 {
+    font-size: 1.28rem;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .separated-ledger ul {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .separated-ledger li {
+    color: var(--color-muted);
+    line-height: 1.5;
+    padding-block: var(--space-3);
+  }
+
+  .separated-ledger li + li {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .separated-ledger__rule {
+    align-items: center;
+    background:
+      linear-gradient(var(--color-rule-strong), var(--color-rule-strong)) center / 1px 100% no-repeat,
+      var(--eqvii-bg-lift);
+    border-block: 1px solid var(--color-rule-strong);
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    padding: var(--space-4);
+    text-align: center;
+  }
+
+  .separated-ledger__rule span {
+    background: var(--eqvii-bg-lift);
+    color: var(--color-text);
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 750;
+    line-height: 1.25;
+    padding-block: var(--space-3);
+  }
+
+  @media (max-width: 52rem) {
+    .separated-ledger {
+      grid-template-columns: 1fr;
+    }
+
+    .separated-ledger__rule {
+      background:
+        linear-gradient(90deg, var(--color-rule-strong), var(--color-rule-strong)) center / 100% 1px no-repeat,
+        var(--eqvii-bg-lift);
+      border-block: 0;
+      border-inline: 1px solid var(--color-rule-strong);
+      min-height: 6rem;
+    }
+  }
+</style>

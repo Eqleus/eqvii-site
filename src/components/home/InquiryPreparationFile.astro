@@ -1,0 +1,88 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+
+interface Props {
+  heading: string;
+  body: string;
+  note: string;
+  ctaLabel?: string;
+}
+
+const { heading, body, note, ctaLabel = 'Prepare an inquiry file' } = Astro.props;
+---
+
+<section class="inquiry-preparation-file" aria-labelledby="inquiry-preparation-heading">
+  <div class="container inquiry-preparation-file__inner">
+    <div>
+      <p class="eyebrow">Routed inquiry</p>
+      <h2 id="inquiry-preparation-heading">{heading}</h2>
+      <p>{body}</p>
+    </div>
+    <aside>
+      <ButtonLink href="/inquiry/">{ctaLabel}</ButtonLink>
+      <p>{note}</p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .inquiry-preparation-file {
+    background: var(--eqvii-bg-lift);
+    border-bottom: 1px solid var(--color-rule);
+    padding-block: var(--space-9);
+  }
+
+  .inquiry-preparation-file__inner {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 24rem);
+    padding: var(--space-6);
+  }
+
+  .inquiry-preparation-file__inner > * {
+    min-width: 0;
+  }
+
+  .inquiry-preparation-file h2 {
+    font-size: 2.7rem;
+    line-height: 1.02;
+    margin: var(--space-5) 0 0;
+  }
+
+  .inquiry-preparation-file p:not(.eyebrow) {
+    color: var(--color-muted);
+    font-size: 1.06rem;
+    line-height: 1.7;
+    margin: var(--space-5) 0 0;
+    max-width: 47rem;
+  }
+
+  .inquiry-preparation-file aside {
+    border-left: 1px solid var(--color-rule);
+    padding-left: var(--space-6);
+  }
+
+  .inquiry-preparation-file aside p {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 52rem) {
+    .inquiry-preparation-file__inner {
+      grid-template-columns: 1fr;
+      padding: var(--space-5);
+    }
+
+    .inquiry-preparation-file aside {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule);
+      padding-left: 0;
+      padding-top: var(--space-5);
+    }
+
+    .inquiry-preparation-file h2 {
+      font-size: 2.1rem;
+    }
+  }
+</style>

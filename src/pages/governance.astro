@@ -1,5 +1,6 @@
 ---
 import CovenantGrid from '../components/home/CovenantGrid.astro';
+import DecisionBar from '../components/home/DecisionBar.astro';
 import DecisionOutcomeTable from '../components/page/DecisionOutcomeTable.astro';
 import PageHero from '../components/page/PageHero.astro';
 import PageSection from '../components/page/PageSection.astro';
@@ -56,6 +57,8 @@ const outcomes = [
     body: 'The vehicle would weaken Charter boundaries, legitimacy, public-value purpose, local delivery, ecological integrity, or trust.',
   },
 ];
+
+const decisionBarItems = outcomes.map((outcome) => ({ label: outcome.label }));
 ---
 
 <BaseLayout
@@ -99,7 +102,10 @@ const outcomes = [
     eyebrow="Decision outcomes"
     heading="Governance must be able to say more than yes."
   >
-    <DecisionOutcomeTable outcomes={outcomes} />
+    <DecisionBar items={decisionBarItems} />
+    <div class="governance-detail-table">
+      <DecisionOutcomeTable outcomes={outcomes} />
+    </div>
   </PageSection>
 
   <PageSection
@@ -113,3 +119,9 @@ const outcomes = [
     </RuleNote>
   </PageSection>
 </BaseLayout>
+
+<style>
+  .governance-detail-table {
+    margin-top: var(--space-5);
+  }
+</style>

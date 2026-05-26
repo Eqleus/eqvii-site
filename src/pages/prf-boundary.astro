@@ -1,32 +1,23 @@
 ---
-import BoundaryLedger from '../components/home/BoundaryLedger.astro';
+import SeparatedLedger from '../components/home/SeparatedLedger.astro';
 import InsideOutsideTable from '../components/page/InsideOutsideTable.astro';
 import PageHero from '../components/page/PageHero.astro';
 import PageSection from '../components/page/PageSection.astro';
 import RuleNote from '../components/page/RuleNote.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const prfItems = [
-  'Prevention',
-  'Repair',
-  'Verification',
-  'Trust infrastructure',
-  'Local readiness',
-  'Affected-community participation',
-  'Safeguarding',
-  'Measurement readiness',
-  'Adoption support',
-];
-
-const eqviiItems = [
-  'Lawful payment logic',
-  'Ring-fenced vehicle discipline',
-  'Clear counterparties',
-  'Public-value obligations',
-  'Execution controls',
-  'Auditability',
-  'Stop and correction rights',
-];
+const separatedLedger = {
+  left: {
+    title: 'PRF',
+    summary: 'Public-good, prevention, repair, readiness',
+    items: ['Prevention', 'Repair', 'Verification', 'Trust infrastructure', 'Local readiness', 'Safeguarding', 'Measurement readiness'],
+  },
+  right: {
+    title: 'EQVII',
+    summary: 'Vehicle, mandate, payment, execution, audit',
+    items: ['Lawful payment logic', 'Ring-fenced vehicle discipline', 'Clear counterparties', 'Execution controls', 'Auditability', 'Stop and correction rights'],
+  },
+};
 ---
 
 <BaseLayout
@@ -53,13 +44,10 @@ const eqviiItems = [
   <PageSection
     id="prf-eqvii-sides"
     eyebrow="Separated layers"
-    heading="PRF and EQVII can coordinate. They may not merge."
+    heading="Same challenge. Separate ledger."
     tone="panel"
   >
-    <BoundaryLedger
-      left={{ title: 'PRF side', items: prfItems }}
-      right={{ title: 'EQVII side', items: eqviiItems }}
-    />
+    <SeparatedLedger left={separatedLedger.left} right={separatedLedger.right} rule="Same challenge. Separate ledger." />
   </PageSection>
 
   <PageSection

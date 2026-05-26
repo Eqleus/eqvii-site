@@ -1,15 +1,29 @@
 ---
 import ButtonLink from '../ui/ButtonLink.astro';
-import PerimeterStrip from './PerimeterStrip.astro';
 
 interface Props {
   eyebrow: string;
   headline: string;
   subline: string;
-  stripItems: string[];
+  primaryLabel?: string;
+  secondaryLabel?: string;
+  fileItems?: Array<{ label: string; value: string }>;
 }
 
-const { eyebrow, headline, subline, stripItems } = Astro.props;
+const {
+  eyebrow,
+  headline,
+  subline,
+  primaryLabel = 'Explore the perimeter',
+  secondaryLabel = 'Prepare an inquiry file',
+  fileItems = [
+    { label: 'File', value: 'EQVII / Perimeter' },
+    { label: 'Status', value: 'Public orientation' },
+    { label: 'Route', value: 'Vehicle-specific' },
+    { label: 'Rule', value: 'Capital enters late' },
+    { label: 'Boundary', value: 'System not investable' },
+  ],
+} = Astro.props;
 ---
 
 <section class="hero-perimeter" aria-labelledby="home-hero-title">
@@ -19,35 +33,27 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
       <h1 id="home-hero-title">{headline}</h1>
       <p class="hero-perimeter__subline">{subline}</p>
       <div class="hero-perimeter__actions" aria-label="Primary actions">
-        <ButtonLink href="/perimeter/">Explore the perimeter</ButtonLink>
-        <ButtonLink href="/inquiry/" variant="secondary">Begin a routed inquiry</ButtonLink>
+        <ButtonLink href="/perimeter/">{primaryLabel}</ButtonLink>
+        <ButtonLink href="/inquiry/" variant="secondary">{secondaryLabel}</ButtonLink>
       </div>
     </div>
 
     <aside class="hero-perimeter__file" aria-label="EQVII perimeter file">
       <div class="hero-perimeter__file-header">
-        <span>Review file</span>
+        <span>Perimeter file</span>
         <span>EQVII / 01</span>
       </div>
       <dl>
-        <div>
-          <dt>Capital</dt>
-          <dd>Enters only after perimeter review.</dd>
-        </div>
-        <div>
-          <dt>System</dt>
-          <dd>Not converted into a financial product.</dd>
-        </div>
-        <div>
-          <dt>Route</dt>
-          <dd>Vehicle, mandate, contract, or execution structure.</dd>
-        </div>
+        {
+          fileItems.map((item) => (
+            <div>
+              <dt>{item.label}</dt>
+              <dd>{item.value}</dd>
+            </div>
+          ))
+        }
       </dl>
     </aside>
-
-    <div class="hero-perimeter__strip">
-      <PerimeterStrip items={stripItems} />
-    </div>
   </div>
 </section>
 
@@ -61,9 +67,10 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
   }
 
   .hero-perimeter__inner {
+    align-items: end;
     display: grid;
     gap: var(--space-8);
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 27rem);
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 31rem);
     padding-block: var(--space-10);
   }
 
@@ -73,7 +80,7 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
   }
 
   .hero-perimeter h1 {
-    font-size: 4.75rem;
+    font-size: 4.95rem;
     line-height: 0.98;
     margin: var(--space-5) 0 0;
     max-width: 12ch;
@@ -96,10 +103,21 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
 
   .hero-perimeter__file {
     align-self: end;
-    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 94%, transparent);
     border: 1px solid var(--color-rule-strong);
-    box-shadow: 0 24px 60px color-mix(in srgb, var(--color-text) 8%, transparent);
+    box-shadow: 0 28px 80px color-mix(in srgb, var(--eqvii-graphite) 12%, transparent);
     min-width: 0;
+    position: relative;
+  }
+
+  .hero-perimeter__file::before {
+    background: var(--eqvii-signal);
+    content: "";
+    height: 3px;
+    left: -1px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
   }
 
   .hero-perimeter__file-header {
@@ -119,7 +137,7 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
   .hero-perimeter dl div {
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: 6rem 1fr;
+    grid-template-columns: 8rem 1fr;
     padding: var(--space-4);
   }
 
@@ -136,11 +154,6 @@ const { eyebrow, headline, subline, stripItems } = Astro.props;
   .hero-perimeter dd {
     color: var(--color-muted);
     margin: 0;
-  }
-
-  .hero-perimeter__strip {
-    grid-column: 1 / -1;
-    min-width: 0;
   }
 
   @media (max-width: 62rem) {

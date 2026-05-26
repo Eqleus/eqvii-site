@@ -1,0 +1,99 @@
+---
+interface Step {
+  number: string;
+  label: string;
+  detail?: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="capital-entry-sequence" aria-label="Capital entry sequence">
+  {
+    steps.map((step) => (
+      <li>
+        <span>{step.number}</span>
+        <strong>{step.label}</strong>
+        {step.detail && <p>{step.detail}</p>}
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .capital-entry-sequence {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .capital-entry-sequence li {
+    min-width: 0;
+    min-height: 13rem;
+    padding: var(--space-5);
+    position: relative;
+  }
+
+  .capital-entry-sequence li + li {
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .capital-entry-sequence span {
+    color: var(--color-steel);
+    display: block;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--space-4);
+  }
+
+  .capital-entry-sequence strong {
+    border-top: 2px solid var(--eqvii-signal);
+    display: block;
+    font-size: 1.08rem;
+    line-height: 1.24;
+    padding-top: var(--space-3);
+  }
+
+  .capital-entry-sequence p {
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin: var(--space-4) 0 0;
+  }
+
+  @media (max-width: 64rem) {
+    .capital-entry-sequence {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .capital-entry-sequence li + li {
+      border-left: 0;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .capital-entry-sequence li:nth-child(even) {
+      border-left: 1px solid var(--color-rule);
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .capital-entry-sequence {
+      grid-template-columns: 1fr;
+    }
+
+    .capital-entry-sequence li {
+      min-height: 0;
+    }
+
+    .capital-entry-sequence li:nth-child(even) {
+      border-left: 0;
+    }
+  }
+</style>

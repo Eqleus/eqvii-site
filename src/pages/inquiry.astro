@@ -1,5 +1,6 @@
 ---
 import InquiryBoundaryPanel from '../components/page/InquiryBoundaryPanel.astro';
+import InquiryRouteStatus from '../components/page/InquiryRouteStatus.astro';
 import InsideOutsideTable from '../components/page/InsideOutsideTable.astro';
 import PageHero from '../components/page/PageHero.astro';
 import PageSection from '../components/page/PageSection.astro';
@@ -58,6 +59,22 @@ const inquiryTypes = [
 ];
 
 const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicInquiryEmail}` : '';
+
+const routeStatus = [
+  { label: 'Public contact route', value: contact.publicInquiryEmail ? 'Confirmed' : 'Pending confirmation' },
+  { label: 'Submission function', value: contact.publicInquiryEmail ? 'Email route active' : 'Not yet active' },
+  { label: 'Current use', value: 'Inquiry preparation only' },
+];
+
+const preparationChecklist = [
+  'Defined execution component',
+  'Current authority or counterparty',
+  'Payment logic, if known',
+  'Public-value obligation',
+  'PRF / EQVII boundary concern',
+  'Local delivery condition',
+  'Stop or correction question',
+];
 ---
 
 <BaseLayout
@@ -86,10 +103,21 @@ const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicIn
   <PageSection
     id="information-requested"
     eyebrow="Information requested"
-    heading="The first file is classificatory."
-    lead="The routing layer should gather enough information to classify the matter without implying approval, mandate, investment access, or permission to make public claims."
+    heading="Prepare the file before the route."
+    lead="Formal public inquiry routing will be added once the contact route is confirmed. Until then, this page defines the information a serious inquiry will need before EQVII can classify the matter."
     tone="panel"
   >
+    <InquiryRouteStatus items={routeStatus} />
+    <div class="inquiry-prep-grid">
+      {
+        preparationChecklist.map((item, index) => (
+          <article class="record-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </article>
+        ))
+      }
+    </div>
     <div class="inquiry-file">
       <article>
         <h3>Fields to prepare</h3>
@@ -104,7 +132,6 @@ const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicIn
         </ul>
       </article>
     </div>
-    <p class="inquiry-placeholder">Formal inquiry routing will be added once the public contact route is confirmed.</p>
   </PageSection>
 
   <PageSection
@@ -146,10 +173,20 @@ const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicIn
 </BaseLayout>
 
 <style>
+  .inquiry-prep-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: var(--space-5);
+    padding: 1px;
+    background: var(--color-rule);
+  }
+
   .inquiry-file {
     border: 1px solid var(--color-rule-strong);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: var(--space-5);
   }
 
   .inquiry-file article {
@@ -194,6 +231,7 @@ const inquiryEmailHref = contact.publicInquiryEmail ? `mailto:${contact.publicIn
   }
 
   @media (max-width: 46rem) {
+    .inquiry-prep-grid,
     .inquiry-file {
       grid-template-columns: 1fr;
     }

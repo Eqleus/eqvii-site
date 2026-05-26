@@ -1,0 +1,86 @@
+---
+interface StatusItem {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  items: StatusItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<aside class="inquiry-route-status" aria-label="Inquiry route status">
+  <div class="inquiry-route-status__header">
+    <span>Inquiry route status</span>
+    <span>Controlled public routing</span>
+  </div>
+  <dl>
+    {
+      items.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</aside>
+
+<style>
+  .inquiry-route-status {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule-strong);
+  }
+
+  .inquiry-route-status__header {
+    align-items: center;
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-muted);
+    display: flex;
+    font-size: 0.78rem;
+    justify-content: space-between;
+    padding: var(--space-4);
+  }
+
+  .inquiry-route-status dl {
+    margin: 0;
+  }
+
+  .inquiry-route-status div {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: minmax(8rem, 0.42fr) 1fr;
+    padding: var(--space-4);
+  }
+
+  .inquiry-route-status div + div {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .inquiry-route-status dt {
+    color: var(--color-steel);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .inquiry-route-status dd {
+    color: var(--color-text);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .inquiry-route-status__header,
+    .inquiry-route-status div {
+      grid-template-columns: 1fr;
+    }
+
+    .inquiry-route-status__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+  }
+</style>

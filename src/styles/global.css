@@ -1,17 +1,30 @@
 :root {
-  --color-background: #f6f5f2;
-  --color-surface: #ffffff;
-  --color-panel: #ecece8;
-  --color-panel-quiet: #f1f0ec;
-  --color-text: #111214;
-  --color-muted: #5d6062;
-  --color-steel: #8d9092;
-  --color-steel-dark: #55595c;
-  --color-rule: #d8d8d4;
-  --color-rule-soft: #e8e8e4;
-  --color-rule-strong: #aeb0b1;
-  --color-focus: #40566d;
-  --color-severe-muted: #c6c8c8;
+  --eqvii-bg: #f4f2ec;
+  --eqvii-bg-lift: #faf9f5;
+  --eqvii-panel: #ffffff;
+  --eqvii-panel-cool: #ecedea;
+  --eqvii-ink: #090909;
+  --eqvii-graphite: #202326;
+  --eqvii-muted: #606367;
+  --eqvii-platinum: #b9bbb8;
+  --eqvii-platinum-deep: #8f9290;
+  --eqvii-line: rgba(9, 9, 9, 0.14);
+  --eqvii-line-strong: rgba(9, 9, 9, 0.28);
+  --eqvii-signal: #c7c2b8;
+
+  --color-background: var(--eqvii-bg);
+  --color-surface: var(--eqvii-panel);
+  --color-panel: var(--eqvii-panel-cool);
+  --color-panel-quiet: var(--eqvii-bg-lift);
+  --color-text: var(--eqvii-ink);
+  --color-muted: var(--eqvii-muted);
+  --color-steel: var(--eqvii-platinum-deep);
+  --color-steel-dark: var(--eqvii-graphite);
+  --color-rule: var(--eqvii-line);
+  --color-rule-soft: rgba(9, 9, 9, 0.08);
+  --color-rule-strong: var(--eqvii-line-strong);
+  --color-focus: var(--eqvii-graphite);
+  --color-severe-muted: #d8d8d2;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -213,7 +226,7 @@ button:focus-visible {
   min-height: 2.85rem;
   padding: 0.75rem 1rem;
   text-decoration: none;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .button-link--primary {
@@ -222,8 +235,9 @@ button:focus-visible {
 }
 
 .button-link--primary:hover {
-  background: var(--color-steel-dark);
-  border-color: var(--color-steel-dark);
+  background: var(--eqvii-graphite);
+  border-color: var(--eqvii-graphite);
+  transform: translateY(-1px);
 }
 
 .button-link--secondary {
@@ -232,13 +246,14 @@ button:focus-visible {
 }
 
 .button-link--secondary:hover {
-  background: var(--color-panel);
+  background: var(--eqvii-bg-lift);
+  transform: translateY(-1px);
 }
 
 .site-footer {
-  background: var(--color-text);
+  background: var(--eqvii-graphite);
   color: var(--color-severe-muted);
-  padding-block: var(--space-6);
+  padding-block: var(--space-5);
 }
 
 .site-footer__inner {
@@ -248,8 +263,10 @@ button:focus-visible {
 }
 
 .site-footer p {
+  font-size: 0.92rem;
+  line-height: 1.55;
   margin: 0;
-  max-width: 34rem;
+  max-width: 44rem;
 }
 
 .site-footer p:first-child,
@@ -299,26 +316,30 @@ button:focus-visible {
 }
 
 .comparison-list {
+  background: var(--color-surface);
   border: 1px solid var(--color-rule-strong);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: relative;
 }
 
 .comparison-list article {
   background: var(--color-surface);
   min-width: 0;
-  padding: var(--space-5);
+  padding: var(--space-6);
 }
 
 .comparison-list article + article {
-  border-left: 1px solid var(--color-rule-strong);
+  background: var(--eqvii-bg-lift);
+  border-left: 4px double var(--color-rule-strong);
 }
 
 .comparison-list h3 {
   border-bottom: 1px solid var(--color-rule);
-  font-size: 1rem;
+  font-size: 0.96rem;
   margin: 0;
   padding-bottom: var(--space-4);
+  text-transform: none;
 }
 
 .comparison-list ul {
@@ -329,6 +350,7 @@ button:focus-visible {
 
 .comparison-list li {
   color: var(--color-muted);
+  line-height: 1.5;
   padding-block: var(--space-3);
 }
 
