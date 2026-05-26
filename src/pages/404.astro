@@ -1,0 +1,13 @@
+---
+import SectionShell from '../components/ui/SectionShell.astro';
+import PageIntro from '../components/ui/PageIntro.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not Found" description="The requested page was not found.">
+  <SectionShell>
+    <PageIntro title="Page Not Found">
+      <p>The requested page could not be found.</p>
+    </PageIntro>
+  </SectionShell>
+</BaseLayout>

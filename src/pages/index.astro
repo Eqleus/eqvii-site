@@ -1,0 +1,14 @@
+---
+import SectionShell from '../components/ui/SectionShell.astro';
+import PageIntro from '../components/ui/PageIntro.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Home" description="Foundational placeholder page for EQVII Holdings.">
+  <SectionShell>
+    <PageIntro title={site.entityName}>
+      <p>{site.shortPositioning}. Placeholder institutional overview.</p>
+    </PageIntro>
+  </SectionShell>
+</BaseLayout>
